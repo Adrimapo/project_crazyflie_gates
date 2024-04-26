@@ -2,6 +2,7 @@
 
 usage() {
     echo "  options:"
+    echo "      -a: Generates a random world: [true | false]"
     echo "      -s: simulated, choices: [true | false]"
     echo "      -m: multi agent, choices: [true | false]"
     echo "      -e: estimator_type, choices: [ground_truth, raw_odometry, mocap_pose]"
@@ -11,8 +12,12 @@ usage() {
 }
 
 # Arg parser
-while getopts "se:mrtn" opt; do
+while getopts "ase:mrtn" opt; do
+
   case ${opt} in
+    a )
+      rand="true"
+      ;;
     s )
       simulated="true"
       ;;
@@ -50,6 +55,13 @@ source utils/tools.bash
 
 # Shift optional args
 shift $((OPTIND -1))
+
+# Generates a random world
+if [ "${rand}" == "true" ]; then
+  cd src
+  python3 generateMap.py
+  cd ..
+fi
 
 ## DEFAULTS
 simulated=${simulated:="false"}  # default ign_gz

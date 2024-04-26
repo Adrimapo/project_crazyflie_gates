@@ -1,34 +1,40 @@
 {
-    "world_name": "empty",
+    "world_name": "grass",
     "drones": [
         {
             "model_type": "quadrotor_base",
             "model_name": "cf0",
             "xyz": [
                 0.0,
-                -1.5,
+                -3.5,
                 0.3
             ],
             "rpy": [
                 0,
-                0,
-                0.0
+                0.0,
+                1.5707963267948966
             ],
-            "flight_time": 60
+            "flight_time": 60,
+            "payload": [
+                {
+                    "model_name": "hd_camera",
+                    "model_type": "hd_camera"
+                }
+            ]
         }
     ],
     "objects": [
         {
-            "model_type": "aruco_gate_1",
+            "model_type": "aruco_gate_2",
             "model_name": "gate_0",
             "xyz": [
-                -1.0,
+                0.0,
                 0.0,
                 0.0
             ],
             "rpy": [
-                0,
-                0,
+                0.0,
+                0.0,
                 -1.57
             ],
             "object_bridges": [
@@ -39,14 +45,150 @@
             "model_type": "aruco_gate_2",
             "model_name": "gate_1",
             "xyz": [
-                2.0,
-                0.0,
+                0.2817265999502843,
+                5.814773800966692,
                 0.0
             ],
             "rpy": [
-                0,
-                0,
-                1.57
+                0.0,
+                0.0,
+                -1.9312911134583617
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_2",
+            "xyz": [
+                1.4628963938241075,
+                13.797286499083013,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.412957022571648
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_3",
+            "xyz": [
+                0.48026864915064094,
+                21.5548905485295,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.8512729718504137
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_4",
+            "xyz": [
+                5.3386276644648625,
+                29.014446292016547,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.942749698770441
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_5",
+            "xyz": [
+                9.04459924456263,
+                35.9947418612257,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -2.497944412372898
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_6",
+            "xyz": [
+                13.56301639055331,
+                40.05728895176745,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.5650315123699545
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_7",
+            "xyz": [
+                13.171706063584045,
+                48.38443347542501,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.0578145713702158
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_8",
+            "xyz": [
+                9.671181152794858,
+                56.27748917104532,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.7932586565595876
+            ],
+            "object_bridges": [
+                "pose"
+            ]
+        },
+        {
+            "model_type": "aruco_gate_2",
+            "model_name": "gate_9",
+            "xyz": [
+                10.254859531123438,
+                62.88613539458771,
+                0.0
+            ],
+            "rpy": [
+                0.0,
+                0.0,
+                -1.23213785671875
             ],
             "object_bridges": [
                 "pose"

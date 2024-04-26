@@ -6,4 +6,27 @@ objects:
 - type: pose
   frame: gate_1/link
   pose_topic: "/gate_1/gate_1/pose"
-  
+- type: pose
+  frame: gate_2/link
+  pose_topic: "/gate_2/gate_2/pose"
+- type: pose
+  frame: gate_3/link
+  pose_topic: "/gate_3/gate_3/pose"
+- type: pose
+  frame: gate_4/link
+  pose_topic: "/gate_4/gate_4/pose"
+- type: pose
+  frame: gate_5/link
+  pose_topic: "/gate_5/gate_5/pose"
+- type: pose
+  frame: gate_6/link
+  pose_topic: "/gate_6/gate_6/pose"
+- type: pose
+  frame: gate_7/link
+  pose_topic: "/gate_7/gate_7/pose"
+- type: pose
+  frame: gate_8/link
+  pose_topic: "/gate_8/gate_8/pose"
+- type: pose
+  frame: gate_9/link
+  pose_topic: "/gate_9/gate_9/pose"

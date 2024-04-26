@@ -7,8 +7,9 @@ import threading
 from typing import List
 import rclpy
 from as2_python_api.drone_interface import DroneInterface
+from generateMap import NUM_GATES
 
-SPEED = 1.0  # Speed of the drone
+SPEED = 3.0  # Speed of the drone
 INGORE_YAW = True  # Yaw mode
 
 
@@ -76,11 +77,13 @@ def follow_path_drones(drone_interface: DroneInterface, drones_namespaces_list: 
 
 
 def confirm(msg: str = 'Continue') -> bool:
-    """ Ask for confirmation """
-    confirmation = input(f"{msg}? (y/n): ")
-    if confirmation == "y":
-        return True
-    return False
+    # """ Ask for confirmation """
+    # confirmation = input(f"{msg}? (y/n): ")
+    # if confirmation == "y":
+    #     return True
+    # return False
+
+    return True
 
 
 def run_func(drones_list: List[DroneInterface], func, *args):
@@ -153,17 +156,10 @@ def run_mission(
         run_func(drones_interfaces, takeoff)
         print("Take Off done")
 
-        if confirm("Go To Initial"):
-            run_func(drones_interfaces, initial_go_to_drones,
+        if confirm("Follow Path"):
+            run_func(drones_interfaces, follow_path_drones,
                      drones_namespaces, paths)
-            if confirm("Follow Path"):
-                run_func(drones_interfaces, follow_path_drones,
-                         drones_namespaces, paths)
-                print("Path done")
-                while confirm("Replay"):
-                    run_func(drones_interfaces, follow_path_drones,
-                             drones_namespaces, paths)
-                    print("Path done")
+            print("Path done")
 
         print("Land")
         if confirm("Land"):
@@ -192,15 +188,19 @@ def main():
                 use_sim_time=input_args.simulated))
 
     # Gates
-    gates_namespaces = ['gate_0/link', 'gate_1/link']
+    gates_namespaces = []
+    for i in range(NUM_GATES):
+        gates_namespaces.append(f'gate_{i}/link')
+
+
     if input_args.simulated:
         print("Mission running in simulation mode")
-        gates_heights = [2.0, 2.0]
+        gates_heights = [2.0] * len(gates_namespaces)
     else:
         print("Mission running in real mode")
-        gates_heights = [0.8, 0.8]
-    gates_desp_x = [1.0, 1.0]
-    gates_desp_y = [0.0, 0.0]
+        gates_heights = [0.8] * len(gates_namespaces)
+    gates_desp_x = [1.0] * len(gates_namespaces)
+    gates_desp_y = [0.0] * len(gates_namespaces)
 
     # Run mission
     run_mission(
