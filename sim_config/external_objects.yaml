@@ -21,12 +21,3 @@ objects:
 - type: pose
   frame: gate_6/link
   pose_topic: "/gate_6/gate_6/pose"
-- type: pose
-  frame: gate_7/link
-  pose_topic: "/gate_7/gate_7/pose"
-- type: pose
-  frame: gate_8/link
-  pose_topic: "/gate_8/gate_8/pose"
-- type: pose
-  frame: gate_9/link
-  pose_topic: "/gate_9/gate_9/pose"

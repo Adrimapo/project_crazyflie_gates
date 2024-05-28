@@ -86,5 +86,6 @@ windows:
   - mission:
       layout:
       panes:
-        - echo Run here the mission
+        - ros2 run drone_sim_driver get_gates_vel.py 
+            --output_directory ./outDir
   <%- end %>

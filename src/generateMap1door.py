@@ -2,11 +2,7 @@ import json
 import math
 import random
 
-NUM_GATES = 7 #1
-
-def get_world():
-    dronePosition = [0.0, -3.5, 0.3]
-    droneRotation = [0, 0.0, math.pi / 2]
+def get_world(dronePosition, droneRotation):
     worldNames = ['empty', 'grass']
 
     world = {
@@ -30,53 +26,30 @@ def get_world():
     }
     return world
 
-def get_gates_poses(n_gates):
-    # First gate is always the same
-    positions = [(0.0, 0.0, 0.0)]
-    orientations = [(0.0, 0.0, -1.57)]
+def get_gates_poses(dronePosition, droneRotation):
+    minDist = 3 # m
 
-    # Constant door values
-    roll = pitch = 0.0
+    # Only generates one random gate 
+    newX = random.uniform(15, 15)
+    newY = random.uniform(15, 15)
+    newZ = random.uniform(-1.5, 4)
 
-    for i in range(n_gates-1):
-        # Angle between both gates
-        center = orientations[-1][2]  # radians
-        angle_width = 0.30  # radians
-        z = random.uniform(-1.5, 4)
-        pos_angle = random.uniform(center - angle_width, center + angle_width)
+    # Gets a gate with a min distance
+    while math.sqrt((newX - dronePosition[0])**2 + (newY - dronePosition[1])**2) < minDist:
+        newX = random.uniform(0, 15)
+        newY = random.uniform(0, 15)
+    
+    angle_to_gate = math.atan2(newY - dronePosition[1], newX - dronePosition[0]) - math.pi / 2
+    newYaw = random.uniform(-math.pi/2, math.pi/2)
 
-        # Estimates the x and y
-        max_x = 8
-        max_y = 4
-        d_max = math.sqrt(max_x**2 + max_y**2)
-        min_dist = 4
+    positions = [(newX, newY, newZ)]
+    orientations = [(0.0, 0.0, angle_to_gate + newYaw)]
 
-        # Normalizes between 0 and 1
-        norm_sin = abs(center -pos_angle) / angle_width
-
-        # Normalizes between minDist and maxDist
-        d_min = (norm_sin * (d_max - min_dist)) + min_dist
-        distance = random.uniform(d_min, d_max)
-
-        # Gets the random x and y
-        x = positions[-1][0] - distance * math.cos(pos_angle)
-        y = positions[-1][1] - distance * math.sin(pos_angle)
-
-        # Estimate yaw
-        yaw_change = random.uniform(0, 1.04)
-        if pos_angle < center:
-            yaw_change = -yaw_change
-
-        yaw = center + yaw_change
-
-        # Save the coords
-        positions.append((x, y, z))
-        orientations.append((roll, pitch, yaw))
 
     return positions, orientations
 
-def get_gates(world, n_gates):
-    positions, orientations = get_gates_poses(n_gates)
+def get_gates(world, n_gates, dronePosition, droneRotation):
+    positions, orientations = get_gates_poses(dronePosition, droneRotation)
 
     # Generate all the gates
     for i in range(n_gates):
@@ -103,10 +76,15 @@ def get_external_objects_data(n_gates):
     return world_str
 
 def main():
+    NUM_GATES = 1
+
+    # Random drone position
+    dronePosition = [random.randint(-10, 10), random.randint(-10, 10), 0.3]
+    droneRotation = [0, 0.0, random.uniform(0, 6.28)]
 
     # Creates the world.json
-    world = get_world()
-    data = get_gates(world, NUM_GATES)
+    world = get_world(dronePosition, droneRotation)
+    data = get_gates(world, NUM_GATES, dronePosition, droneRotation)
 
     with open('../sim_config/world.json', 'w') as f:
         json.dump(data, f, indent=4)

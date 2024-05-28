@@ -16,7 +16,7 @@ while getopts "ase:mrtn" opt; do
 
   case ${opt} in
     a )
-      rand="true"
+      rand="false"
       ;;
     s )
       simulated="true"
@@ -59,6 +59,11 @@ shift $((OPTIND -1))
 # Generates a random world
 if [ "${rand}" == "true" ]; then
   cd src
+  python3 generateMap1door.py
+  cd ..
+
+else 
+  cd src 
   python3 generateMap.py
   cd ..
 fi
